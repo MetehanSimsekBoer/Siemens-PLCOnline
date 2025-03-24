@@ -9,6 +9,7 @@ namespace Siemens_PLCOnline
     public partial class Form1 : Form
     {
         private S7Client plcS7Client = new S7Client();
+        private readonly object plcLock = new object();
         public Form1()
         {
             InitializeComponent();
@@ -22,37 +23,24 @@ namespace Siemens_PLCOnline
         private void btnBasla_Click(object sender, EventArgs e)
         {
             int connectionStatus = plcS7Client.ConnectTo(txtIp.Text, 0, 0);
-            StatusList.Items.Add(connectionStatus.ToString());
+
             if (connectionStatus == 0)
             {
 
                 SendCommandForBool("DB1.DBX1.0", true);
-                Task.Run(async () => await DBReadErrorBitAsync());
+
                 btnStart.Visible = false;
                 btnWrite.Enabled = true;
+                btnRead.Enabled = true;
                 OkuIslemleriWords();
                 OkuIslemleriBoolean();
+
+                Task.Run(async () => await DBReadErrorBitAsync());
             }
-            else
-            {
-                btnStop.Visible = false;
-            }
+            
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            int connectionStatus = plcS7Client.ConnectTo(txtIp.Text, 0, 0);
-            StatusList.Items.Add(connectionStatus.ToString());
-            if (connectionStatus == 0)
-            {
-                SendCommandForBool("DB1.DBX1.0", true);
-                btnStart.Visible = false;
-            }
-            else
-            {
-                btnStop.Visible = false;
-            }
-        }
+
 
         private void button48_Click(object sender, EventArgs e)
         {
@@ -138,15 +126,13 @@ namespace Siemens_PLCOnline
                 "DB1.DBX104.1",//Run
                 "DB1.DBX104.6",//ResetOK
                 "DB1.DBX105.0",//HomeOK
-                "DB1.DBX108.0",//EmergencyAlarm
-                "DB1.DBX108.1",//GateAlarm
-
-                "DB1.DBX109.0",//MainAlarm
-                "DB1.DBX109.1",//FlattenAlarm
-                "DB1.DBX110.0",//RejectAlmSAlarm
-                "DB1.DBX110.1",//RejectAlmRAlarm
+                "DB1.DBX108.0",
+                "DB1.DBX108.1",
+                "DB1.DBX109.0",
+                "DB1.DBX109.1",
+                "DB1.DBX110.0",
+                "DB1.DBX110.1",
                 "DB1.DBX1.0",//TestLife
-                "DB1.DBX105.6",//ErrorPLC
                 
 
             };
@@ -173,23 +159,72 @@ namespace Siemens_PLCOnline
                 txtResetOk.Text = data["DB1.DBX104.6"].ToString();
 
                 txtHomeOk.Text = data["DB1.DBX105.0"].ToString();
+
+                txtTestLife.Text = data["DB1.DBX1.0"].ToString();
+
+
                 txtEmergency.Text = data["DB1.DBX108.0"].ToString();
                 txtGate.Text = data["DB1.DBX108.1"].ToString();
-
                 txtMainAlarm.Text = data["DB1.DBX109.0"].ToString();
+
                 txtFlattenAlarm.Text = data["DB1.DBX109.1"].ToString();
+
+
                 txtRejectAlmSAlarm.Text = data["DB1.DBX110.0"].ToString();
 
                 txtRejectAlmRError.Text = data["DB1.DBX110.1"].ToString();
-                txtTestLife.Text = data["DDB1.DBX1.0"].ToString();
-                txtErrorPLC.Text = data["DB1.DBX105.6"].ToString();
 
+
+
+
+             
             }
 
-
+            StatusList.Items.Add($"Boolean Deðerler Okundu.");
 
         }
+        public void YazIslemleriBoolean()
+        {
 
+
+            var commandsAndValues = new Dictionary<string, bool>
+                    {
+                        { "DB1.DBX0.1", Convert.ToBoolean(txtStart.Text )},
+                         { "DB1.DBX0.0", Convert.ToBoolean(txtLife.Text )},
+                        { "DB1.DBX0.2", Convert.ToBoolean(txtStop.Text) },
+                        { "DB1.DBX0.4", Convert.ToBoolean(txtHome.Text) },
+                        { "DB1.DBX1.7", Convert.ToBoolean(txtCounterReset.Text) },
+                        { "DB1.DBX1.1", Convert.ToBoolean(txtManual.Text) },
+                        { "DB1.DBX3.0", Convert.ToBoolean(txtMainAct.Text) },
+                        { "DB1.DBX3.1", Convert.ToBoolean(txtSpacingAct.Text) },
+                        { "DB1.DBX3.2", Convert.ToBoolean(txtSideHoldingAct.Text) },
+                        { "DB1.DBX3.3", Convert.ToBoolean(txtTopHoldingAct.Text) },
+                        { "DB1.DBX3.4", Convert.ToBoolean(txtIdlerAct.Text) },
+                        { "DB1.DBX0.3", Convert.ToBoolean(txtReset.Text) },
+                        { "DB1.DBX104.5", Convert.ToBoolean(txtResetDo.Text) },
+                        { "DB1.DBX104.1", Convert.ToBoolean(txtRun.Text) },
+                        { "DB1.DBX104.6", Convert.ToBoolean(txtResetOk.Text) },
+                        { "DB1.DBX105.0", Convert.ToBoolean(txtHomeOk.Text) },
+                       { "DB1.DBX1.0", Convert.ToBoolean(txtTestLife.Text) },
+                        { "DB1.DBX105.6", Convert.ToBoolean(txtErrorPLC.Text) },
+
+                         { "DB1.DBX108.0", Convert.ToBoolean(txtEmergency.Text) },
+                        { "DB1.DBX108.1", Convert.ToBoolean(txtGate.Text) },
+                        { "DB1.DBX109.0", Convert.ToBoolean(txtMainAlarm.Text) },
+                         { "DB1.DBX109.1", Convert.ToBoolean(txtFlattenAlarm.Text) },
+                        { "DB1.DBX110.0", Convert.ToBoolean(txtRejectAlmSAlarm.Text) },
+                        { "DB1.DBX110.1", Convert.ToBoolean(txtRejectAlmRError.Text) },
+
+                     };
+
+
+
+
+
+
+            WriteMultipleBoolsToPlc(commandsAndValues);
+
+        }
 
         public void YazIslemleriWords()
         {
@@ -204,6 +239,7 @@ namespace Siemens_PLCOnline
                         { "DB1.DBW28", Convert.ToInt16(txtRejectDelayS.Text) },
                         { "DB1.DBW30", Convert.ToInt16(txtRejectDelayR.Text) },
                         { "DB1.DBW4", Convert.ToInt16(txtStartDelay.Text) },
+                        { "DB1.DBW6", Convert.ToInt16(txtStopDelay.Text) },
                         { "DB1.DBW8", Convert.ToInt16(txtApplicatorDelay.Text) },
                         { "DB1.DBW10", Convert.ToInt16(txtApplicatorTrigger.Text) },
                         { "DB1.DBW12", Convert.ToInt16(txtCameraDelay.Text) },
@@ -219,6 +255,69 @@ namespace Siemens_PLCOnline
 
         }
 
+        
+
+
+
+        public void WriteMultipleBoolsToPlc(Dictionary<string, bool> boolCommands)
+        {
+            try
+            {
+               
+                var grouped = boolCommands
+                    .Where(x => Regex.IsMatch(x.Key, @"^DB(\d+)\.DBX(\d+)\.(\d+)$"))
+                    .Select(x =>
+                    {
+                        var match = Regex.Match(x.Key, @"^DB(\d+)\.DBX(\d+)\.(\d+)$");
+                        return new
+                        {
+                            Address = x.Key,
+                            DB = int.Parse(match.Groups[1].Value),
+                            ByteIndex = int.Parse(match.Groups[2].Value),
+                            BitIndex = int.Parse(match.Groups[3].Value),
+                            Value = x.Value
+                        };
+                    })
+                    .GroupBy(x => new { x.DB, x.ByteIndex });
+
+                foreach (var group in grouped)
+                {
+                    int dbNumber = group.Key.DB;
+                    int byteIndex = group.Key.ByteIndex;
+                    byte[] buffer = new byte[1];
+
+                   
+                    int readResult = plcS7Client.DBRead(dbNumber, byteIndex, 1, buffer);
+                    if (readResult != 0)
+                    {
+                        StatusList.Items.Add($"DB{dbNumber}.DBX{byteIndex}.x okunamadý. Hata kodu: {readResult}");
+                        continue;
+                    }
+
+                  
+                    foreach (var item in group)
+                    {
+                        if (item.Value)
+                            buffer[0] |= (byte)(1 << item.BitIndex);
+                        else
+                            buffer[0] &= (byte)~(1 << item.BitIndex);
+                    }
+
+                  
+                    int writeResult = plcS7Client.DBWrite(dbNumber, byteIndex, 1, buffer);
+                    if (writeResult != 0)
+                    {
+                        StatusList.Items.Add($"DB{dbNumber}.DBX{byteIndex}.x yazýlamadý. Hata kodu: {writeResult}");
+                    }
+                }
+
+                StatusList.Items.Add("Bool yazma iþlemi tamamlandý.");
+            }
+            catch (Exception ex)
+            {
+                StatusList.Items.Add($"Genel Hata: {ex.Message}");
+            }
+        }
 
         public void WriteMultipleWordsToPlc(Dictionary<string, short> commandsAndValues)
         {
@@ -248,7 +347,7 @@ namespace Siemens_PLCOnline
                     int byteIndex = Convert.ToInt16(match.Groups[2].Value);
 
                     byte[] buffer = BitConverter.GetBytes(value);
-                    Array.Reverse(buffer); // Big-endian için
+                    Array.Reverse(buffer); 
 
                     int writeResult = plcS7Client.DBWrite(dbNumber, byteIndex, buffer.Length, buffer);
 
@@ -257,6 +356,7 @@ namespace Siemens_PLCOnline
                         StatusList.Items.Add($"'{plcAddress}' için yazma baþarýsýz. Hata kodu: {writeResult}");
                     }
                 }
+                StatusList.Items.Add($"Yazma Ýþlemi Tamamlandý.");
             }
             catch (Exception ex)
             {
@@ -274,6 +374,7 @@ namespace Siemens_PLCOnline
                 "DB1.DBW28", //RejectDelayS
                 "DB1.DBW30", //RejectDelayR
                 "DB1.DBW4", //StartDelay
+                "DB1.DBW6", //StopDelay
                 "DB1.DBW8", //AplicatorDelay
                 "DB1.DBW10", //ApplicatorTrigger
                 "DB1.DBW12", //CameraDelay
@@ -281,7 +382,7 @@ namespace Siemens_PLCOnline
                 "DB1.DBW38", //Spacing
                 "DB1.DBW42", //SideHolding
                 "DB1.DBW40", //TopHolding
-                "DB1.DBW44",//Idler
+                "DB1.DBW44", //Idler
                 "DB1.DBW52", //ACDriveCount
                 "DB1.DBW54", //DischargeCOunt 
                 "DB1.DBW16.0",//SeperatorDelay
@@ -299,6 +400,7 @@ namespace Siemens_PLCOnline
                 txtRejectDelayS.Text = data["DB1.DBW28"].ToString();
                 txtRejectDelayR.Text = data["DB1.DBW30"].ToString();
                 txtStartDelay.Text = data["DB1.DBW4"].ToString();
+                txtStopDelay.Text = data["DB1.DBW6"].ToString();
                 txtApplicatorDelay.Text = data["DB1.DBW8"].ToString();
                 txtApplicatorTrigger.Text = data["DB1.DBW10"].ToString();
                 txtCameraDelay.Text = data["DB1.DBW12"].ToString();
@@ -314,7 +416,7 @@ namespace Siemens_PLCOnline
                 txtBoxCount.Text = data["DB1.DBW56.0"].ToString();
             }
 
-
+            StatusList.Items.Add($"Word Deðerler Okundu.");
 
         }
 
@@ -476,71 +578,138 @@ namespace Siemens_PLCOnline
         public bool Connected { get => plcS7Client != null && plcS7Client.Connected; }
         public async Task DBReadErrorBitAsync()
         {
-
             try
             {
-
                 List<string> alarmBits = new List<string>
-                {
-                    "DB1.DBX108.0",
-                    "DB1.DBX108.1",
-                    "DB1.DBX109.0",
-                    "DB1.DBX109.1",
-                    "DB1.DBX110.0",
-                    "DB1.DBX110.1"
-                };
+        {
+            "DB1.DBX108.0",
+            "DB1.DBX108.1",
+            "DB1.DBX109.0",
+            "DB1.DBX109.1",
+            "DB1.DBX110.0",
+            "DB1.DBX110.1"
+        };
 
-                while (Connected)
-                {
+                //while (Connected)
+                //{
                     try
                     {
+                        bool errorBit;
 
-                        bool errorBit = ReadBoolFromPlc("DB1.DBX105.6");
+                        
+                        lock (plcLock)
+                        {
+                            errorBit = ReadBoolFromPlc("DB1.DBX105.6");
+                        }
 
                         if (errorBit)
                         {
+                            Dictionary<string, bool> alarmResults;
 
-                            StatusList.Items.Add("Error bit aktif. Alarm bitleri dinleniyor...");
-
-                            var alarmResults = ReadMultipleBoolsFromPlc(alarmBits);
-
-                            foreach (var alarm in alarmResults)
+                            lock (plcLock)
                             {
-                                if (alarm.Value)
-                                {
-
-                                    //AlarmInfo(alarm.Value.Item2);
-
-                                }
+                                var readResult = ReadMultipleBoolsFromPlc(alarmBits);
+                                alarmResults = readResult.ToDictionary(k => k.Key, v => v.Value);
                             }
+
+                            this.Invoke((MethodInvoker)delegate
+                            {
+                                txtErrorPLC.Text = errorBit.ToString();
+                                txtEmergency.Text = alarmResults["DB1.DBX108.0"].ToString();
+                                txtGate.Text = alarmResults["DB1.DBX108.1"].ToString();
+                                txtMainAlarm.Text = alarmResults["DB1.DBX109.0"].ToString();
+                                txtFlattenAlarm.Text = alarmResults["DB1.DBX109.1"].ToString();
+                                txtRejectAlmSAlarm.Text = alarmResults["DB1.DBX110.0"].ToString();
+                                txtRejectAlmRError.Text = alarmResults["DB1.DBX110.1"].ToString();
+                            });
                         }
                         else
                         {
-                            SendCommandForBool("DB1.DBX105.6", false);
+                            lock (plcLock)
+                            {
+                                SendCommandForBool("DB1.DBX105.6", false);
+                            }
+
                             StatusList.Items.Add("Error bit pasif.");
                         }
-
-
                     }
                     catch (Exception ex)
                     {
                         plcS7Client.Disconnect();
                         StatusList.Items.Add($"Hata oluþtu: {ex.Message}");
-                        StatusList.Items.Add($"IP Adresi: {txtIp}");
+                        StatusList.Items.Add($"IP Adresi: {txtIp.Text}");
                     }
 
                     await Task.Delay(1000);
-                }
+                //}
             }
             catch (Exception ex)
             {
-                StatusList.Items.Add($"DBReadBoolAsync hatasý: {ex.Message}");
+                StatusList.Items.Add($"DBReadErrorBitAsync hatasý: {ex.Message}");
             }
         }
 
         private void btnWrite_Click(object sender, EventArgs e)
         {
             YazIslemleriWords();
+            YazIslemleriBoolean();
+        }
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            if (plcS7Client.Connected)
+            {
+                plcS7Client.Disconnect();
+                btnConnect.Text = "Connect";
+                btnConnect.BackColor = System.Drawing.Color.Lime;
+
+                btnLight.BackColor = System.Drawing.Color.Red;
+                StatusList.Items.Add("Baðlantý Kesildi");
+                btnStart.Visible = false;
+                btnStart.Enabled = false;
+                return;
+            }
+
+            int connectionStatus = plcS7Client.ConnectTo(txtIp.Text, 0, 0);
+
+            if (connectionStatus == 0)
+            {
+                SendCommandForBool("DB1.DBX1.0", true);
+
+                btnLight.BackColor = System.Drawing.Color.Lime;
+                StatusList.Items.Add("Baðlantý Saðlandý");
+
+                btnStart.Visible = true;
+                btnStart.Enabled = true;
+
+                btnConnect.Text = "Disconnect";
+                btnConnect.BackColor = System.Drawing.Color.Red;
+            }
+            else
+            {
+                StatusList.Items.Add("Baðlantý Saðlanamadý");
+
+                btnLight.BackColor = System.Drawing.Color.Red;
+                btnStart.Enabled = false;
+
+                btnConnect.Text = "Connect";
+                btnConnect.BackColor = System.Drawing.Color.Lime;
+            }
+        }
+
+        private void Form1_Load_1(object sender, EventArgs e)
+        {
+            btnStart.Enabled = false;
+            btnWrite.Enabled = false;
+            btnRead.Enabled = false;
+        }
+
+      
+
+        private void btnRead_Click(object sender, EventArgs e)
+        {
+            OkuIslemleriWords();
+            OkuIslemleriBoolean();
         }
     }
 }

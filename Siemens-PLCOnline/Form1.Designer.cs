@@ -45,8 +45,6 @@
             label7 = new Label();
             txtSpacing = new TextBox();
             label8 = new Label();
-            textBox9 = new TextBox();
-            label9 = new Label();
             txtRejectDelayR = new TextBox();
             label10 = new Label();
             txtCounterReset = new TextBox();
@@ -67,7 +65,6 @@
             button6 = new Button();
             button7 = new Button();
             button8 = new Button();
-            button9 = new Button();
             button10 = new Button();
             button11 = new Button();
             button12 = new Button();
@@ -162,17 +159,23 @@
             button44 = new Button();
             button45 = new Button();
             txtIp = new TextBox();
-            button46 = new Button();
+            btnConnect = new Button();
             label1 = new Label();
-            button47 = new Button();
+            btnLight = new Button();
             StatusList = new ListBox();
-            btnStop = new Button();
             btnWrite = new Button();
+            btnRead = new Button();
+            groupBox1 = new GroupBox();
+            groupBox2 = new GroupBox();
+            groupBox3 = new GroupBox();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // btnStart
             // 
-            btnStart.Location = new Point(725, 738);
+            btnStart.Location = new Point(850, 364);
             btnStart.Name = "btnStart";
             btnStart.Size = new Size(101, 66);
             btnStart.TabIndex = 0;
@@ -183,22 +186,22 @@
             // LblStart
             // 
             LblStart.AutoSize = true;
-            LblStart.Location = new Point(12, 17);
+            LblStart.Location = new Point(14, 24);
             LblStart.Name = "LblStart";
-            LblStart.Size = new Size(31, 15);
+            LblStart.Size = new Size(35, 15);
             LblStart.TabIndex = 1;
             LblStart.Text = "Start";
             // 
             // txtStart
             // 
-            txtStart.Location = new Point(127, 15);
+            txtStart.Location = new Point(127, 22);
             txtStart.Name = "txtStart";
             txtStart.Size = new Size(51, 23);
             txtStart.TabIndex = 2;
             // 
             // txtStop
             // 
-            txtStop.Location = new Point(127, 68);
+            txtStop.Location = new Point(127, 59);
             txtStop.Name = "txtStop";
             txtStop.Size = new Size(51, 23);
             txtStop.TabIndex = 4;
@@ -206,15 +209,15 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 70);
+            label2.Location = new Point(16, 61);
             label2.Name = "label2";
-            label2.Size = new Size(31, 15);
+            label2.Size = new Size(33, 15);
             label2.TabIndex = 3;
             label2.Text = "Stop";
             // 
             // txtMain
             // 
-            txtMain.Location = new Point(127, 123);
+            txtMain.Location = new Point(132, 31);
             txtMain.Name = "txtMain";
             txtMain.Size = new Size(51, 23);
             txtMain.TabIndex = 6;
@@ -222,15 +225,15 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(12, 126);
+            label3.Location = new Point(17, 34);
             label3.Name = "label3";
-            label3.Size = new Size(101, 15);
+            label3.Size = new Size(106, 15);
             label3.TabIndex = 5;
             label3.Text = "Ana Konveyor Hız";
             // 
             // txtLife
             // 
-            txtLife.Location = new Point(127, 180);
+            txtLife.Location = new Point(127, 96);
             txtLife.Name = "txtLife";
             txtLife.Size = new Size(51, 23);
             txtLife.TabIndex = 8;
@@ -238,15 +241,15 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(12, 182);
+            label4.Location = new Point(17, 99);
             label4.Name = "label4";
-            label4.Size = new Size(26, 15);
+            label4.Size = new Size(28, 15);
             label4.TabIndex = 7;
             label4.Text = "Life";
             // 
             // txtHome
             // 
-            txtHome.Location = new Point(127, 232);
+            txtHome.Location = new Point(127, 136);
             txtHome.Name = "txtHome";
             txtHome.Size = new Size(51, 23);
             txtHome.TabIndex = 10;
@@ -254,15 +257,15 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(12, 234);
+            label5.Location = new Point(15, 139);
             label5.Name = "label5";
-            label5.Size = new Size(40, 15);
+            label5.Size = new Size(41, 15);
             label5.TabIndex = 9;
             label5.Text = "Home";
             // 
             // txtRejectPreDelay
             // 
-            txtRejectPreDelay.Location = new Point(127, 295);
+            txtRejectPreDelay.Location = new Point(132, 77);
             txtRejectPreDelay.Name = "txtRejectPreDelay";
             txtRejectPreDelay.Size = new Size(51, 23);
             txtRejectPreDelay.TabIndex = 12;
@@ -270,15 +273,15 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(12, 297);
+            label6.Location = new Point(17, 79);
             label6.Name = "label6";
-            label6.Size = new Size(105, 15);
+            label6.Size = new Size(110, 15);
             label6.TabIndex = 11;
             label6.Text = "Rjct Piston On Gck";
             // 
             // txtRejectDelayS
             // 
-            txtRejectDelayS.Location = new Point(127, 355);
+            txtRejectDelayS.Location = new Point(132, 121);
             txtRejectDelayS.Name = "txtRejectDelayS";
             txtRejectDelayS.Size = new Size(51, 23);
             txtRejectDelayS.TabIndex = 14;
@@ -286,15 +289,15 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(12, 359);
+            label7.Location = new Point(17, 124);
             label7.Name = "label7";
-            label7.Size = new Size(105, 15);
+            label7.Size = new Size(113, 15);
             label7.TabIndex = 13;
             label7.Text = "Rjct Piston Set Gck";
             // 
             // txtSpacing
             // 
-            txtSpacing.Location = new Point(127, 416);
+            txtSpacing.Location = new Point(133, 453);
             txtSpacing.Name = "txtSpacing";
             txtSpacing.Size = new Size(51, 23);
             txtSpacing.TabIndex = 16;
@@ -302,31 +305,15 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(12, 418);
+            label8.Location = new Point(17, 456);
             label8.Name = "label8";
-            label8.Size = new Size(79, 15);
+            label8.Size = new Size(81, 15);
             label8.TabIndex = 15;
             label8.Text = "Ara Acma Hız";
             // 
-            // textBox9
-            // 
-            textBox9.Location = new Point(127, 481);
-            textBox9.Name = "textBox9";
-            textBox9.Size = new Size(51, 23);
-            textBox9.TabIndex = 18;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Location = new Point(12, 483);
-            label9.Name = "label9";
-            label9.Size = new Size(66, 15);
-            label9.TabIndex = 17;
-            label9.Text = "Rjct Piston ";
-            // 
             // txtRejectDelayR
             // 
-            txtRejectDelayR.Location = new Point(127, 547);
+            txtRejectDelayR.Location = new Point(132, 162);
             txtRejectDelayR.Name = "txtRejectDelayR";
             txtRejectDelayR.Size = new Size(51, 23);
             txtRejectDelayR.TabIndex = 20;
@@ -334,15 +321,15 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(12, 549);
+            label10.Location = new Point(17, 165);
             label10.Name = "label10";
-            label10.Size = new Size(94, 15);
+            label10.Size = new Size(101, 15);
             label10.TabIndex = 19;
             label10.Text = "Rjct Piston Reset";
             // 
             // txtCounterReset
             // 
-            txtCounterReset.Location = new Point(127, 611);
+            txtCounterReset.Location = new Point(128, 395);
             txtCounterReset.Name = "txtCounterReset";
             txtCounterReset.Size = new Size(51, 23);
             txtCounterReset.TabIndex = 22;
@@ -350,15 +337,15 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(12, 613);
+            label11.Location = new Point(13, 397);
             label11.Name = "label11";
-            label11.Size = new Size(78, 15);
+            label11.Size = new Size(85, 15);
             label11.TabIndex = 21;
             label11.Text = "Kutu Icı Reset";
             // 
             // txtManual
             // 
-            txtManual.Location = new Point(127, 671);
+            txtManual.Location = new Point(128, 437);
             txtManual.Name = "txtManual";
             txtManual.Size = new Size(51, 23);
             txtManual.TabIndex = 24;
@@ -366,15 +353,15 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(12, 673);
+            label12.Location = new Point(13, 439);
             label12.Name = "label12";
-            label12.Size = new Size(47, 15);
+            label12.Size = new Size(48, 15);
             label12.TabIndex = 23;
             label12.Text = "Manuel";
             // 
             // txtMainAct
             // 
-            txtMainAct.Location = new Point(127, 735);
+            txtMainAct.Location = new Point(128, 480);
             txtMainAct.Name = "txtMainAct";
             txtMainAct.Size = new Size(51, 23);
             txtMainAct.TabIndex = 26;
@@ -382,15 +369,15 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(12, 737);
+            label13.Location = new Point(13, 482);
             label13.Name = "label13";
-            label13.Size = new Size(52, 15);
+            label13.Size = new Size(53, 15);
             label13.TabIndex = 25;
             label13.Text = "MainAct";
             // 
             // txtSideHoldingAct
             // 
-            txtSideHoldingAct.Location = new Point(127, 864);
+            txtSideHoldingAct.Location = new Point(128, 672);
             txtSideHoldingAct.Name = "txtSideHoldingAct";
             txtSideHoldingAct.Size = new Size(51, 23);
             txtSideHoldingAct.TabIndex = 30;
@@ -398,15 +385,15 @@
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(12, 866);
+            label14.Location = new Point(13, 674);
             label14.Name = "label14";
-            label14.Size = new Size(90, 15);
+            label14.Size = new Size(93, 15);
             label14.TabIndex = 29;
             label14.Text = "SideHoldingAct";
             // 
             // txtSpacingAct
             // 
-            txtSpacingAct.Location = new Point(127, 800);
+            txtSpacingAct.Location = new Point(128, 526);
             txtSpacingAct.Name = "txtSpacingAct";
             txtSpacingAct.Size = new Size(51, 23);
             txtSpacingAct.TabIndex = 28;
@@ -414,15 +401,15 @@
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new Point(12, 802);
+            label15.Location = new Point(13, 528);
             label15.Name = "label15";
-            label15.Size = new Size(67, 15);
+            label15.Size = new Size(69, 15);
             label15.TabIndex = 27;
             label15.Text = "SpacingAct";
             // 
             // button1
             // 
-            button1.Location = new Point(182, 15);
+            button1.Location = new Point(184, 22);
             button1.Name = "button1";
             button1.Size = new Size(34, 23);
             button1.TabIndex = 133;
@@ -430,7 +417,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(182, 68);
+            button2.Location = new Point(184, 59);
             button2.Name = "button2";
             button2.Size = new Size(34, 23);
             button2.TabIndex = 134;
@@ -438,7 +425,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(182, 123);
+            button3.Location = new Point(187, 31);
             button3.Name = "button3";
             button3.Size = new Size(34, 23);
             button3.TabIndex = 135;
@@ -446,7 +433,7 @@
             // 
             // button4
             // 
-            button4.Location = new Point(182, 181);
+            button4.Location = new Point(184, 96);
             button4.Name = "button4";
             button4.Size = new Size(34, 23);
             button4.TabIndex = 136;
@@ -454,7 +441,7 @@
             // 
             // button5
             // 
-            button5.Location = new Point(182, 232);
+            button5.Location = new Point(184, 137);
             button5.Name = "button5";
             button5.Size = new Size(34, 23);
             button5.TabIndex = 137;
@@ -462,7 +449,7 @@
             // 
             // button6
             // 
-            button6.Location = new Point(182, 296);
+            button6.Location = new Point(187, 78);
             button6.Name = "button6";
             button6.Size = new Size(34, 23);
             button6.TabIndex = 138;
@@ -470,7 +457,7 @@
             // 
             // button7
             // 
-            button7.Location = new Point(182, 356);
+            button7.Location = new Point(187, 122);
             button7.Name = "button7";
             button7.Size = new Size(34, 23);
             button7.TabIndex = 139;
@@ -478,23 +465,15 @@
             // 
             // button8
             // 
-            button8.Location = new Point(182, 417);
+            button8.Location = new Point(187, 454);
             button8.Name = "button8";
             button8.Size = new Size(34, 23);
             button8.TabIndex = 140;
             button8.UseVisualStyleBackColor = true;
             // 
-            // button9
-            // 
-            button9.Location = new Point(182, 482);
-            button9.Name = "button9";
-            button9.Size = new Size(34, 23);
-            button9.TabIndex = 141;
-            button9.UseVisualStyleBackColor = true;
-            // 
             // button10
             // 
-            button10.Location = new Point(182, 547);
+            button10.Location = new Point(187, 162);
             button10.Name = "button10";
             button10.Size = new Size(34, 23);
             button10.TabIndex = 142;
@@ -502,7 +481,7 @@
             // 
             // button11
             // 
-            button11.Location = new Point(182, 613);
+            button11.Location = new Point(183, 395);
             button11.Name = "button11";
             button11.Size = new Size(34, 23);
             button11.TabIndex = 143;
@@ -510,7 +489,7 @@
             // 
             // button12
             // 
-            button12.Location = new Point(182, 671);
+            button12.Location = new Point(183, 437);
             button12.Name = "button12";
             button12.Size = new Size(34, 23);
             button12.TabIndex = 144;
@@ -518,7 +497,7 @@
             // 
             // button13
             // 
-            button13.Location = new Point(182, 735);
+            button13.Location = new Point(183, 480);
             button13.Name = "button13";
             button13.Size = new Size(34, 23);
             button13.TabIndex = 145;
@@ -526,7 +505,7 @@
             // 
             // button14
             // 
-            button14.Location = new Point(182, 800);
+            button14.Location = new Point(183, 526);
             button14.Name = "button14";
             button14.Size = new Size(34, 23);
             button14.TabIndex = 146;
@@ -534,7 +513,7 @@
             // 
             // button15
             // 
-            button15.Location = new Point(182, 866);
+            button15.Location = new Point(183, 674);
             button15.Name = "button15";
             button15.Size = new Size(34, 23);
             button15.TabIndex = 147;
@@ -542,7 +521,7 @@
             // 
             // txtApplicatorDelay
             // 
-            txtApplicatorDelay.Location = new Point(357, 863);
+            txtApplicatorDelay.Location = new Point(132, 273);
             txtApplicatorDelay.Name = "txtApplicatorDelay";
             txtApplicatorDelay.Size = new Size(51, 23);
             txtApplicatorDelay.TabIndex = 229;
@@ -550,15 +529,15 @@
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new Point(255, 865);
+            label16.Location = new Point(17, 276);
             label16.Name = "label16";
-            label16.Size = new Size(91, 15);
+            label16.Size = new Size(95, 15);
             label16.TabIndex = 228;
             label16.Text = "ApplicatorDelay";
             // 
             // txtAcDriveCount
             // 
-            txtAcDriveCount.Location = new Point(357, 799);
+            txtAcDriveCount.Location = new Point(133, 632);
             txtAcDriveCount.Name = "txtAcDriveCount";
             txtAcDriveCount.Size = new Size(51, 23);
             txtAcDriveCount.TabIndex = 227;
@@ -566,15 +545,15 @@
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new Point(255, 801);
+            label17.Location = new Point(17, 635);
             label17.Name = "label17";
-            label17.Size = new Size(83, 15);
+            label17.Size = new Size(86, 15);
             label17.TabIndex = 226;
             label17.Text = "ACDriveCount";
             // 
             // txtHomeOk
             // 
-            txtHomeOk.Location = new Point(357, 734);
+            txtHomeOk.Location = new Point(126, 346);
             txtHomeOk.Name = "txtHomeOk";
             txtHomeOk.Size = new Size(51, 23);
             txtHomeOk.TabIndex = 225;
@@ -582,15 +561,15 @@
             // label18
             // 
             label18.AutoSize = true;
-            label18.Location = new Point(255, 736);
+            label18.Location = new Point(15, 348);
             label18.Name = "label18";
-            label18.Size = new Size(56, 15);
+            label18.Size = new Size(58, 15);
             label18.TabIndex = 224;
             label18.Text = "HomeOK";
             // 
             // txtResetOk
             // 
-            txtResetOk.Location = new Point(357, 670);
+            txtResetOk.Location = new Point(126, 304);
             txtResetOk.Name = "txtResetOk";
             txtResetOk.Size = new Size(51, 23);
             txtResetOk.TabIndex = 223;
@@ -598,15 +577,15 @@
             // label19
             // 
             label19.AutoSize = true;
-            label19.Location = new Point(255, 672);
+            label19.Location = new Point(16, 307);
             label19.Name = "label19";
-            label19.Size = new Size(51, 15);
+            label19.Size = new Size(56, 15);
             label19.TabIndex = 222;
             label19.Text = "ResetOK";
             // 
             // txtRun
             // 
-            txtRun.Location = new Point(357, 610);
+            txtRun.Location = new Point(126, 261);
             txtRun.Name = "txtRun";
             txtRun.Size = new Size(51, 23);
             txtRun.TabIndex = 221;
@@ -614,15 +593,15 @@
             // label20
             // 
             label20.AutoSize = true;
-            label20.Location = new Point(255, 612);
+            label20.Location = new Point(17, 263);
             label20.Name = "label20";
-            label20.Size = new Size(28, 15);
+            label20.Size = new Size(29, 15);
             label20.TabIndex = 220;
             label20.Text = "Run";
             // 
             // txtResetDo
             // 
-            txtResetDo.Location = new Point(357, 546);
+            txtResetDo.Location = new Point(126, 220);
             txtResetDo.Name = "txtResetDo";
             txtResetDo.Size = new Size(51, 23);
             txtResetDo.TabIndex = 219;
@@ -630,15 +609,15 @@
             // label21
             // 
             label21.AutoSize = true;
-            label21.Location = new Point(255, 548);
+            label21.Location = new Point(16, 222);
             label21.Name = "label21";
-            label21.Size = new Size(52, 15);
+            label21.Size = new Size(57, 15);
             label21.TabIndex = 218;
             label21.Text = "ResetDO";
             // 
             // txtReset
             // 
-            txtReset.Location = new Point(357, 480);
+            txtReset.Location = new Point(127, 180);
             txtReset.Name = "txtReset";
             txtReset.Size = new Size(51, 23);
             txtReset.TabIndex = 217;
@@ -646,15 +625,15 @@
             // label22
             // 
             label22.AutoSize = true;
-            label22.Location = new Point(255, 482);
+            label22.Location = new Point(16, 183);
             label22.Name = "label22";
-            label22.Size = new Size(35, 15);
+            label22.Size = new Size(39, 15);
             label22.TabIndex = 216;
             label22.Text = "Reset";
             // 
             // txtDischargeCount
             // 
-            txtDischargeCount.Location = new Point(357, 415);
+            txtDischargeCount.Location = new Point(133, 677);
             txtDischargeCount.Name = "txtDischargeCount";
             txtDischargeCount.Size = new Size(51, 23);
             txtDischargeCount.TabIndex = 215;
@@ -662,15 +641,15 @@
             // label23
             // 
             label23.AutoSize = true;
-            label23.Location = new Point(255, 417);
+            label23.Location = new Point(17, 680);
             label23.Name = "label23";
-            label23.Size = new Size(92, 15);
+            label23.Size = new Size(95, 15);
             label23.TabIndex = 214;
             label23.Text = "DischargeCount";
             // 
             // txtIdler
             // 
-            txtIdler.Location = new Point(357, 354);
+            txtIdler.Location = new Point(133, 585);
             txtIdler.Name = "txtIdler";
             txtIdler.Size = new Size(51, 23);
             txtIdler.TabIndex = 213;
@@ -678,15 +657,15 @@
             // label24
             // 
             label24.AutoSize = true;
-            label24.Location = new Point(255, 356);
+            label24.Location = new Point(17, 588);
             label24.Name = "label24";
-            label24.Size = new Size(30, 15);
+            label24.Size = new Size(33, 15);
             label24.TabIndex = 212;
             label24.Text = "Idler";
             // 
             // txtStopDelay
             // 
-            txtStopDelay.Location = new Point(357, 294);
+            txtStopDelay.Location = new Point(132, 235);
             txtStopDelay.Name = "txtStopDelay";
             txtStopDelay.Size = new Size(51, 23);
             txtStopDelay.TabIndex = 211;
@@ -694,15 +673,15 @@
             // label25
             // 
             label25.AutoSize = true;
-            label25.Location = new Point(255, 296);
+            label25.Location = new Point(17, 238);
             label25.Name = "label25";
-            label25.Size = new Size(60, 15);
+            label25.Size = new Size(64, 15);
             label25.TabIndex = 210;
             label25.Text = "StopDelay";
             // 
             // txtStartDelay
             // 
-            txtStartDelay.Location = new Point(357, 231);
+            txtStartDelay.Location = new Point(132, 200);
             txtStartDelay.Name = "txtStartDelay";
             txtStartDelay.Size = new Size(51, 23);
             txtStartDelay.TabIndex = 209;
@@ -710,15 +689,15 @@
             // label26
             // 
             label26.AutoSize = true;
-            label26.Location = new Point(255, 233);
+            label26.Location = new Point(17, 203);
             label26.Name = "label26";
-            label26.Size = new Size(60, 15);
+            label26.Size = new Size(66, 15);
             label26.TabIndex = 208;
             label26.Text = "StartDelay";
             // 
             // txtTopHolding
             // 
-            txtTopHolding.Location = new Point(357, 179);
+            txtTopHolding.Location = new Point(133, 543);
             txtTopHolding.Name = "txtTopHolding";
             txtTopHolding.Size = new Size(51, 23);
             txtTopHolding.TabIndex = 207;
@@ -726,15 +705,15 @@
             // label27
             // 
             label27.AutoSize = true;
-            label27.Location = new Point(255, 181);
+            label27.Location = new Point(17, 545);
             label27.Name = "label27";
-            label27.Size = new Size(69, 15);
+            label27.Size = new Size(70, 15);
             label27.TabIndex = 206;
             label27.Text = "TopHolding";
             // 
             // txtSideHolding
             // 
-            txtSideHolding.Location = new Point(357, 122);
+            txtSideHolding.Location = new Point(133, 500);
             txtSideHolding.Name = "txtSideHolding";
             txtSideHolding.Size = new Size(51, 23);
             txtSideHolding.TabIndex = 205;
@@ -742,15 +721,15 @@
             // label28
             // 
             label28.AutoSize = true;
-            label28.Location = new Point(255, 124);
+            label28.Location = new Point(17, 503);
             label28.Name = "label28";
-            label28.Size = new Size(72, 15);
+            label28.Size = new Size(74, 15);
             label28.TabIndex = 204;
             label28.Text = "SideHolding";
             // 
             // txtIdlerAct
             // 
-            txtIdlerAct.Location = new Point(357, 67);
+            txtIdlerAct.Location = new Point(127, 625);
             txtIdlerAct.Name = "txtIdlerAct";
             txtIdlerAct.Size = new Size(51, 23);
             txtIdlerAct.TabIndex = 203;
@@ -758,15 +737,15 @@
             // label29
             // 
             label29.AutoSize = true;
-            label29.Location = new Point(255, 69);
+            label29.Location = new Point(13, 625);
             label29.Name = "label29";
-            label29.Size = new Size(48, 15);
+            label29.Size = new Size(52, 15);
             label29.TabIndex = 202;
             label29.Text = "IdlerAct";
             // 
             // txtTopHoldingAct
             // 
-            txtTopHoldingAct.Location = new Point(357, 14);
+            txtTopHoldingAct.Location = new Point(127, 572);
             txtTopHoldingAct.Name = "txtTopHoldingAct";
             txtTopHoldingAct.Size = new Size(51, 23);
             txtTopHoldingAct.TabIndex = 201;
@@ -774,15 +753,15 @@
             // label30
             // 
             label30.AutoSize = true;
-            label30.Location = new Point(255, 19);
+            label30.Location = new Point(13, 576);
             label30.Name = "label30";
-            label30.Size = new Size(87, 15);
+            label30.Size = new Size(89, 15);
             label30.TabIndex = 200;
             label30.Text = "TopHoldingAct";
             // 
             // txtErrorPLC
             // 
-            txtErrorPLC.Location = new Point(591, 798);
+            txtErrorPLC.Location = new Point(121, 379);
             txtErrorPLC.Name = "txtErrorPLC";
             txtErrorPLC.Size = new Size(51, 23);
             txtErrorPLC.TabIndex = 272;
@@ -790,15 +769,15 @@
             // label47
             // 
             label47.AutoSize = true;
-            label47.Location = new Point(486, 803);
+            label47.Location = new Point(16, 384);
             label47.Name = "label47";
-            label47.Size = new Size(56, 15);
+            label47.Size = new Size(58, 15);
             label47.TabIndex = 271;
             label47.Text = "Error PLC";
             // 
             // txtTestLife
             // 
-            txtTestLife.Location = new Point(591, 733);
+            txtTestLife.Location = new Point(126, 721);
             txtTestLife.Name = "txtTestLife";
             txtTestLife.Size = new Size(51, 23);
             txtTestLife.TabIndex = 270;
@@ -806,22 +785,22 @@
             // label48
             // 
             label48.AutoSize = true;
-            label48.Location = new Point(486, 738);
+            label48.Location = new Point(13, 724);
             label48.Name = "label48";
-            label48.Size = new Size(49, 15);
+            label48.Size = new Size(54, 15);
             label48.TabIndex = 269;
             label48.Text = "Test Life";
             // 
             // txtRejectAlmRError
             // 
-            txtRejectAlmRError.Location = new Point(591, 669);
+            txtRejectAlmRError.Location = new Point(121, 332);
             txtRejectAlmRError.Name = "txtRejectAlmRError";
             txtRejectAlmRError.Size = new Size(51, 23);
             txtRejectAlmRError.TabIndex = 268;
             // 
             // label49
             // 
-            label49.Location = new Point(486, 656);
+            label49.Location = new Point(16, 329);
             label49.Name = "label49";
             label49.Size = new Size(92, 40);
             label49.TabIndex = 267;
@@ -829,7 +808,7 @@
             // 
             // txtBoxCount
             // 
-            txtBoxCount.Location = new Point(591, 609);
+            txtBoxCount.Location = new Point(133, 845);
             txtBoxCount.Name = "txtBoxCount";
             txtBoxCount.Size = new Size(51, 23);
             txtBoxCount.TabIndex = 266;
@@ -837,22 +816,22 @@
             // label50
             // 
             label50.AutoSize = true;
-            label50.Location = new Point(486, 614);
+            label50.Location = new Point(17, 847);
             label50.Name = "label50";
-            label50.Size = new Size(81, 15);
+            label50.Size = new Size(85, 15);
             label50.TabIndex = 265;
             label50.Text = "Kutu Icı Adedi";
             // 
             // txtSeperatorReset
             // 
-            txtSeperatorReset.Location = new Point(591, 545);
+            txtSeperatorReset.Location = new Point(133, 790);
             txtSeperatorReset.Name = "txtSeperatorReset";
             txtSeperatorReset.Size = new Size(51, 23);
             txtSeperatorReset.TabIndex = 264;
             // 
             // label51
             // 
-            label51.Location = new Point(486, 536);
+            label51.Location = new Point(17, 783);
             label51.Name = "label51";
             label51.Size = new Size(92, 34);
             label51.TabIndex = 263;
@@ -860,14 +839,14 @@
             // 
             // txtSeperatorDelay
             // 
-            txtSeperatorDelay.Location = new Point(591, 479);
+            txtSeperatorDelay.Location = new Point(133, 732);
             txtSeperatorDelay.Name = "txtSeperatorDelay";
             txtSeperatorDelay.Size = new Size(51, 23);
             txtSeperatorDelay.TabIndex = 262;
             // 
             // label52
             // 
-            label52.Location = new Point(486, 472);
+            label52.Location = new Point(17, 724);
             label52.Name = "label52";
             label52.Size = new Size(81, 34);
             label52.TabIndex = 261;
@@ -875,14 +854,14 @@
             // 
             // txtRejectAlmSAlarm
             // 
-            txtRejectAlmSAlarm.Location = new Point(591, 414);
+            txtRejectAlmSAlarm.Location = new Point(121, 266);
             txtRejectAlmSAlarm.Name = "txtRejectAlmSAlarm";
             txtRejectAlmSAlarm.Size = new Size(51, 23);
             txtRejectAlmSAlarm.TabIndex = 260;
             // 
             // label53
             // 
-            label53.Location = new Point(480, 414);
+            label53.Location = new Point(16, 255);
             label53.Name = "label53";
             label53.Size = new Size(98, 42);
             label53.TabIndex = 259;
@@ -891,7 +870,7 @@
             // 
             // txtFlattenAlarm
             // 
-            txtFlattenAlarm.Location = new Point(591, 353);
+            txtFlattenAlarm.Location = new Point(121, 196);
             txtFlattenAlarm.Name = "txtFlattenAlarm";
             txtFlattenAlarm.Size = new Size(51, 23);
             txtFlattenAlarm.TabIndex = 258;
@@ -899,15 +878,15 @@
             // label54
             // 
             label54.AutoSize = true;
-            label54.Location = new Point(486, 358);
+            label54.Location = new Point(16, 201);
             label54.Name = "label54";
-            label54.Size = new Size(75, 15);
+            label54.Size = new Size(79, 15);
             label54.TabIndex = 257;
             label54.Text = "FlattenAlarm";
             // 
             // txtMainAlarm
             // 
-            txtMainAlarm.Location = new Point(591, 293);
+            txtMainAlarm.Location = new Point(121, 140);
             txtMainAlarm.Name = "txtMainAlarm";
             txtMainAlarm.Size = new Size(51, 23);
             txtMainAlarm.TabIndex = 256;
@@ -915,15 +894,15 @@
             // label55
             // 
             label55.AutoSize = true;
-            label55.Location = new Point(486, 298);
+            label55.Location = new Point(16, 145);
             label55.Name = "label55";
-            label55.Size = new Size(66, 15);
+            label55.Size = new Size(67, 15);
             label55.TabIndex = 255;
             label55.Text = "MainAlarm";
             // 
             // txtGate
             // 
-            txtGate.Location = new Point(591, 230);
+            txtGate.Location = new Point(121, 88);
             txtGate.Name = "txtGate";
             txtGate.Size = new Size(51, 23);
             txtGate.TabIndex = 254;
@@ -931,15 +910,15 @@
             // label56
             // 
             label56.AutoSize = true;
-            label56.Location = new Point(486, 235);
+            label56.Location = new Point(16, 91);
             label56.Name = "label56";
-            label56.Size = new Size(31, 15);
+            label56.Size = new Size(34, 15);
             label56.TabIndex = 253;
             label56.Text = "Gate";
             // 
             // txtEmergency
             // 
-            txtEmergency.Location = new Point(591, 178);
+            txtEmergency.Location = new Point(121, 36);
             txtEmergency.Name = "txtEmergency";
             txtEmergency.Size = new Size(51, 23);
             txtEmergency.TabIndex = 252;
@@ -947,15 +926,15 @@
             // label57
             // 
             label57.AutoSize = true;
-            label57.Location = new Point(486, 183);
+            label57.Location = new Point(16, 41);
             label57.Name = "label57";
-            label57.Size = new Size(66, 15);
+            label57.Size = new Size(69, 15);
             label57.TabIndex = 251;
             label57.Text = "Emergency";
             // 
             // txtCameraTimeout
             // 
-            txtCameraTimeout.Location = new Point(591, 121);
+            txtCameraTimeout.Location = new Point(133, 408);
             txtCameraTimeout.Name = "txtCameraTimeout";
             txtCameraTimeout.Size = new Size(51, 23);
             txtCameraTimeout.TabIndex = 250;
@@ -963,15 +942,15 @@
             // label58
             // 
             label58.AutoSize = true;
-            label58.Location = new Point(486, 126);
+            label58.Location = new Point(17, 412);
             label58.Name = "label58";
-            label58.Size = new Size(92, 15);
+            label58.Size = new Size(96, 15);
             label58.TabIndex = 249;
             label58.Text = "CameraTimeout";
             // 
             // txtCameraDelay
             // 
-            txtCameraDelay.Location = new Point(591, 66);
+            txtCameraDelay.Location = new Point(133, 358);
             txtCameraDelay.Name = "txtCameraDelay";
             txtCameraDelay.Size = new Size(51, 23);
             txtCameraDelay.TabIndex = 248;
@@ -979,15 +958,15 @@
             // label59
             // 
             label59.AutoSize = true;
-            label59.Location = new Point(486, 71);
+            label59.Location = new Point(17, 361);
             label59.Name = "label59";
-            label59.Size = new Size(77, 15);
+            label59.Size = new Size(80, 15);
             label59.TabIndex = 247;
             label59.Text = "CameraDelay";
             // 
             // txtApplicatorTrigger
             // 
-            txtApplicatorTrigger.Location = new Point(591, 13);
+            txtApplicatorTrigger.Location = new Point(133, 316);
             txtApplicatorTrigger.Name = "txtApplicatorTrigger";
             txtApplicatorTrigger.Size = new Size(51, 23);
             txtApplicatorTrigger.TabIndex = 246;
@@ -995,15 +974,15 @@
             // label60
             // 
             label60.AutoSize = true;
-            label60.Location = new Point(486, 16);
+            label60.Location = new Point(17, 319);
             label60.Name = "label60";
-            label60.Size = new Size(98, 15);
+            label60.Size = new Size(104, 15);
             label60.TabIndex = 245;
             label60.Text = "ApplicatorTrigger";
             // 
             // button16
             // 
-            button16.Location = new Point(414, 864);
+            button16.Location = new Point(187, 274);
             button16.Name = "button16";
             button16.Size = new Size(34, 23);
             button16.TabIndex = 304;
@@ -1011,7 +990,7 @@
             // 
             // button17
             // 
-            button17.Location = new Point(414, 800);
+            button17.Location = new Point(187, 633);
             button17.Name = "button17";
             button17.Size = new Size(34, 23);
             button17.TabIndex = 303;
@@ -1019,7 +998,7 @@
             // 
             // button18
             // 
-            button18.Location = new Point(414, 734);
+            button18.Location = new Point(183, 346);
             button18.Name = "button18";
             button18.Size = new Size(34, 23);
             button18.TabIndex = 302;
@@ -1027,7 +1006,7 @@
             // 
             // button19
             // 
-            button19.Location = new Point(414, 670);
+            button19.Location = new Point(183, 304);
             button19.Name = "button19";
             button19.Size = new Size(34, 23);
             button19.TabIndex = 301;
@@ -1035,7 +1014,7 @@
             // 
             // button20
             // 
-            button20.Location = new Point(414, 610);
+            button20.Location = new Point(183, 261);
             button20.Name = "button20";
             button20.Size = new Size(34, 23);
             button20.TabIndex = 300;
@@ -1043,7 +1022,7 @@
             // 
             // button21
             // 
-            button21.Location = new Point(414, 546);
+            button21.Location = new Point(183, 220);
             button21.Name = "button21";
             button21.Size = new Size(34, 23);
             button21.TabIndex = 299;
@@ -1051,7 +1030,7 @@
             // 
             // button22
             // 
-            button22.Location = new Point(414, 480);
+            button22.Location = new Point(184, 180);
             button22.Name = "button22";
             button22.Size = new Size(34, 23);
             button22.TabIndex = 298;
@@ -1059,7 +1038,7 @@
             // 
             // button23
             // 
-            button23.Location = new Point(414, 416);
+            button23.Location = new Point(187, 678);
             button23.Name = "button23";
             button23.Size = new Size(34, 23);
             button23.TabIndex = 297;
@@ -1067,7 +1046,7 @@
             // 
             // button24
             // 
-            button24.Location = new Point(414, 353);
+            button24.Location = new Point(187, 584);
             button24.Name = "button24";
             button24.Size = new Size(34, 23);
             button24.TabIndex = 296;
@@ -1075,7 +1054,7 @@
             // 
             // button25
             // 
-            button25.Location = new Point(414, 295);
+            button25.Location = new Point(187, 235);
             button25.Name = "button25";
             button25.Size = new Size(34, 23);
             button25.TabIndex = 295;
@@ -1083,7 +1062,7 @@
             // 
             // button26
             // 
-            button26.Location = new Point(414, 231);
+            button26.Location = new Point(187, 200);
             button26.Name = "button26";
             button26.Size = new Size(34, 23);
             button26.TabIndex = 294;
@@ -1091,7 +1070,7 @@
             // 
             // button27
             // 
-            button27.Location = new Point(414, 180);
+            button27.Location = new Point(187, 544);
             button27.Name = "button27";
             button27.Size = new Size(34, 23);
             button27.TabIndex = 293;
@@ -1099,7 +1078,7 @@
             // 
             // button28
             // 
-            button28.Location = new Point(414, 122);
+            button28.Location = new Point(187, 500);
             button28.Name = "button28";
             button28.Size = new Size(34, 23);
             button28.TabIndex = 292;
@@ -1107,7 +1086,7 @@
             // 
             // button29
             // 
-            button29.Location = new Point(414, 67);
+            button29.Location = new Point(184, 625);
             button29.Name = "button29";
             button29.Size = new Size(34, 23);
             button29.TabIndex = 291;
@@ -1115,7 +1094,7 @@
             // 
             // button30
             // 
-            button30.Location = new Point(414, 14);
+            button30.Location = new Point(184, 572);
             button30.Name = "button30";
             button30.Size = new Size(34, 23);
             button30.TabIndex = 290;
@@ -1123,7 +1102,7 @@
             // 
             // button32
             // 
-            button32.Location = new Point(648, 800);
+            button32.Location = new Point(178, 379);
             button32.Name = "button32";
             button32.Size = new Size(34, 23);
             button32.TabIndex = 318;
@@ -1131,7 +1110,7 @@
             // 
             // button33
             // 
-            button33.Location = new Point(648, 732);
+            button33.Location = new Point(183, 720);
             button33.Name = "button33";
             button33.Size = new Size(34, 23);
             button33.TabIndex = 317;
@@ -1139,7 +1118,7 @@
             // 
             // button34
             // 
-            button34.Location = new Point(648, 668);
+            button34.Location = new Point(178, 332);
             button34.Name = "button34";
             button34.Size = new Size(34, 23);
             button34.TabIndex = 316;
@@ -1147,7 +1126,7 @@
             // 
             // button35
             // 
-            button35.Location = new Point(648, 608);
+            button35.Location = new Point(187, 845);
             button35.Name = "button35";
             button35.Size = new Size(34, 23);
             button35.TabIndex = 315;
@@ -1155,7 +1134,7 @@
             // 
             // button36
             // 
-            button36.Location = new Point(648, 544);
+            button36.Location = new Point(187, 790);
             button36.Name = "button36";
             button36.Size = new Size(34, 23);
             button36.TabIndex = 314;
@@ -1163,7 +1142,7 @@
             // 
             // button37
             // 
-            button37.Location = new Point(648, 478);
+            button37.Location = new Point(187, 732);
             button37.Name = "button37";
             button37.Size = new Size(34, 23);
             button37.TabIndex = 313;
@@ -1171,7 +1150,7 @@
             // 
             // button38
             // 
-            button38.Location = new Point(648, 414);
+            button38.Location = new Point(178, 266);
             button38.Name = "button38";
             button38.Size = new Size(34, 23);
             button38.TabIndex = 312;
@@ -1179,7 +1158,7 @@
             // 
             // button39
             // 
-            button39.Location = new Point(648, 351);
+            button39.Location = new Point(178, 195);
             button39.Name = "button39";
             button39.Size = new Size(34, 23);
             button39.TabIndex = 311;
@@ -1187,7 +1166,7 @@
             // 
             // button40
             // 
-            button40.Location = new Point(648, 293);
+            button40.Location = new Point(178, 140);
             button40.Name = "button40";
             button40.Size = new Size(34, 23);
             button40.TabIndex = 310;
@@ -1195,7 +1174,7 @@
             // 
             // button41
             // 
-            button41.Location = new Point(648, 229);
+            button41.Location = new Point(178, 88);
             button41.Name = "button41";
             button41.Size = new Size(34, 23);
             button41.TabIndex = 309;
@@ -1203,7 +1182,7 @@
             // 
             // button42
             // 
-            button42.Location = new Point(648, 178);
+            button42.Location = new Point(178, 36);
             button42.Name = "button42";
             button42.Size = new Size(34, 23);
             button42.TabIndex = 308;
@@ -1211,7 +1190,7 @@
             // 
             // button43
             // 
-            button43.Location = new Point(648, 120);
+            button43.Location = new Point(187, 407);
             button43.Name = "button43";
             button43.Size = new Size(34, 23);
             button43.TabIndex = 307;
@@ -1219,7 +1198,7 @@
             // 
             // button44
             // 
-            button44.Location = new Point(648, 65);
+            button44.Location = new Point(187, 357);
             button44.Name = "button44";
             button44.Size = new Size(34, 23);
             button44.TabIndex = 306;
@@ -1227,7 +1206,7 @@
             // 
             // button45
             // 
-            button45.Location = new Point(648, 12);
+            button45.Location = new Point(187, 315);
             button45.Name = "button45";
             button45.Size = new Size(34, 23);
             button45.TabIndex = 305;
@@ -1235,216 +1214,256 @@
             // 
             // txtIp
             // 
-            txtIp.Location = new Point(729, 27);
+            txtIp.Location = new Point(651, 12);
             txtIp.Name = "txtIp";
             txtIp.Size = new Size(91, 23);
             txtIp.TabIndex = 320;
-            txtIp.Text = "0.0.0.0";
+            txtIp.Text = "192.168.0.199";
             // 
-            // button46
+            // btnConnect
             // 
-            button46.Location = new Point(729, 54);
-            button46.Name = "button46";
-            button46.Size = new Size(91, 46);
-            button46.TabIndex = 321;
-            button46.Text = "Connect";
-            button46.UseVisualStyleBackColor = true;
+            btnConnect.Font = new Font("Segoe UI", 9F);
+            btnConnect.Location = new Point(687, 42);
+            btnConnect.Name = "btnConnect";
+            btnConnect.Size = new Size(91, 46);
+            btnConnect.TabIndex = 321;
+            btnConnect.Text = "Connect";
+            btnConnect.UseVisualStyleBackColor = true;
+            btnConnect.Click += btnConnect_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(700, 30);
+            label1.Location = new Point(622, 15);
             label1.Name = "label1";
-            label1.Size = new Size(23, 15);
+            label1.Size = new Size(24, 15);
             label1.TabIndex = 322;
             label1.Text = "IP :";
             // 
-            // button47
+            // btnLight
             // 
-            button47.BackColor = Color.Yellow;
-            button47.Location = new Point(826, 27);
-            button47.Name = "button47";
-            button47.Size = new Size(30, 23);
-            button47.TabIndex = 323;
-            button47.UseVisualStyleBackColor = false;
+            btnLight.BackColor = Color.Yellow;
+            btnLight.Location = new Point(748, 12);
+            btnLight.Name = "btnLight";
+            btnLight.Size = new Size(30, 23);
+            btnLight.TabIndex = 323;
+            btnLight.UseVisualStyleBackColor = false;
             // 
             // StatusList
             // 
             StatusList.FormattingEnabled = true;
             StatusList.ItemHeight = 15;
-            StatusList.Location = new Point(725, 160);
+            StatusList.Location = new Point(551, 521);
             StatusList.Name = "StatusList";
-            StatusList.Size = new Size(170, 169);
+            StatusList.Size = new Size(444, 394);
             StatusList.TabIndex = 324;
-            // 
-            // btnStop
-            // 
-            btnStop.Location = new Point(725, 738);
-            btnStop.Name = "btnStop";
-            btnStop.Size = new Size(101, 66);
-            btnStop.TabIndex = 325;
-            btnStop.Text = "Stop";
-            btnStop.UseVisualStyleBackColor = true;
-            btnStop.Click += button48_Click;
             // 
             // btnWrite
             // 
-            btnWrite.Enabled = false;
-            btnWrite.Location = new Point(725, 839);
+            btnWrite.FlatAppearance.BorderColor = Color.OrangeRed;
+            btnWrite.Font = new Font("Segoe UI", 9F);
+            btnWrite.Location = new Point(790, 436);
             btnWrite.Name = "btnWrite";
-            btnWrite.Size = new Size(101, 67);
+            btnWrite.Size = new Size(100, 72);
             btnWrite.TabIndex = 326;
-            btnWrite.Text = "Yaz";
+            btnWrite.Text = "YAZ";
             btnWrite.UseVisualStyleBackColor = true;
             btnWrite.Click += btnWrite_Click;
+            // 
+            // btnRead
+            // 
+            btnRead.Font = new Font("Segoe UI", 9F);
+            btnRead.Location = new Point(896, 436);
+            btnRead.Name = "btnRead";
+            btnRead.Size = new Size(99, 72);
+            btnRead.TabIndex = 327;
+            btnRead.Text = "OKU";
+            btnRead.UseVisualStyleBackColor = true;
+            btnRead.Click += btnRead_Click;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(button42);
+            groupBox1.Controls.Add(label57);
+            groupBox1.Controls.Add(txtEmergency);
+            groupBox1.Controls.Add(label56);
+            groupBox1.Controls.Add(txtGate);
+            groupBox1.Controls.Add(label55);
+            groupBox1.Controls.Add(txtMainAlarm);
+            groupBox1.Controls.Add(label54);
+            groupBox1.Controls.Add(txtFlattenAlarm);
+            groupBox1.Controls.Add(button41);
+            groupBox1.Controls.Add(button32);
+            groupBox1.Controls.Add(button40);
+            groupBox1.Controls.Add(button34);
+            groupBox1.Controls.Add(button39);
+            groupBox1.Controls.Add(button38);
+            groupBox1.Controls.Add(label53);
+            groupBox1.Controls.Add(txtRejectAlmSAlarm);
+            groupBox1.Controls.Add(label49);
+            groupBox1.Controls.Add(txtRejectAlmRError);
+            groupBox1.Controls.Add(txtErrorPLC);
+            groupBox1.Controls.Add(label47);
+            groupBox1.ForeColor = Color.Red;
+            groupBox1.Location = new Point(551, 91);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(226, 424);
+            groupBox1.TabIndex = 328;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Alarm Bits";
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(button3);
+            groupBox2.Controls.Add(label3);
+            groupBox2.Controls.Add(txtMain);
+            groupBox2.Controls.Add(label6);
+            groupBox2.Controls.Add(txtRejectPreDelay);
+            groupBox2.Controls.Add(label7);
+            groupBox2.Controls.Add(txtRejectDelayS);
+            groupBox2.Controls.Add(button6);
+            groupBox2.Controls.Add(button7);
+            groupBox2.Controls.Add(button10);
+            groupBox2.Controls.Add(label10);
+            groupBox2.Controls.Add(txtRejectDelayR);
+            groupBox2.Controls.Add(button35);
+            groupBox2.Controls.Add(button26);
+            groupBox2.Controls.Add(button36);
+            groupBox2.Controls.Add(label26);
+            groupBox2.Controls.Add(button37);
+            groupBox2.Controls.Add(txtStartDelay);
+            groupBox2.Controls.Add(button17);
+            groupBox2.Controls.Add(button43);
+            groupBox2.Controls.Add(label25);
+            groupBox2.Controls.Add(button44);
+            groupBox2.Controls.Add(txtStopDelay);
+            groupBox2.Controls.Add(button23);
+            groupBox2.Controls.Add(button45);
+            groupBox2.Controls.Add(txtBoxCount);
+            groupBox2.Controls.Add(button25);
+            groupBox2.Controls.Add(label50);
+            groupBox2.Controls.Add(button16);
+            groupBox2.Controls.Add(button24);
+            groupBox2.Controls.Add(label16);
+            groupBox2.Controls.Add(button27);
+            groupBox2.Controls.Add(txtApplicatorDelay);
+            groupBox2.Controls.Add(txtSeperatorReset);
+            groupBox2.Controls.Add(button28);
+            groupBox2.Controls.Add(label51);
+            groupBox2.Controls.Add(label60);
+            groupBox2.Controls.Add(txtSeperatorDelay);
+            groupBox2.Controls.Add(txtApplicatorTrigger);
+            groupBox2.Controls.Add(label52);
+            groupBox2.Controls.Add(label59);
+            groupBox2.Controls.Add(txtCameraDelay);
+            groupBox2.Controls.Add(label58);
+            groupBox2.Controls.Add(txtCameraTimeout);
+            groupBox2.Controls.Add(txtAcDriveCount);
+            groupBox2.Controls.Add(button8);
+            groupBox2.Controls.Add(label17);
+            groupBox2.Controls.Add(label8);
+            groupBox2.Controls.Add(txtSpacing);
+            groupBox2.Controls.Add(label28);
+            groupBox2.Controls.Add(txtSideHolding);
+            groupBox2.Controls.Add(label27);
+            groupBox2.Controls.Add(txtDischargeCount);
+            groupBox2.Controls.Add(txtTopHolding);
+            groupBox2.Controls.Add(label23);
+            groupBox2.Controls.Add(label24);
+            groupBox2.Controls.Add(txtIdler);
+            groupBox2.Location = new Point(12, 12);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(252, 901);
+            groupBox2.TabIndex = 329;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Words Values";
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(txtStart);
+            groupBox3.Controls.Add(LblStart);
+            groupBox3.Controls.Add(label2);
+            groupBox3.Controls.Add(txtStop);
+            groupBox3.Controls.Add(label4);
+            groupBox3.Controls.Add(txtLife);
+            groupBox3.Controls.Add(label5);
+            groupBox3.Controls.Add(txtHome);
+            groupBox3.Controls.Add(label11);
+            groupBox3.Controls.Add(txtCounterReset);
+            groupBox3.Controls.Add(label12);
+            groupBox3.Controls.Add(button33);
+            groupBox3.Controls.Add(txtTestLife);
+            groupBox3.Controls.Add(txtManual);
+            groupBox3.Controls.Add(label48);
+            groupBox3.Controls.Add(button29);
+            groupBox3.Controls.Add(button18);
+            groupBox3.Controls.Add(button30);
+            groupBox3.Controls.Add(label13);
+            groupBox3.Controls.Add(button19);
+            groupBox3.Controls.Add(txtMainAct);
+            groupBox3.Controls.Add(txtIdlerAct);
+            groupBox3.Controls.Add(button20);
+            groupBox3.Controls.Add(label29);
+            groupBox3.Controls.Add(label15);
+            groupBox3.Controls.Add(txtTopHoldingAct);
+            groupBox3.Controls.Add(button21);
+            groupBox3.Controls.Add(label30);
+            groupBox3.Controls.Add(txtSpacingAct);
+            groupBox3.Controls.Add(button22);
+            groupBox3.Controls.Add(label14);
+            groupBox3.Controls.Add(txtSideHoldingAct);
+            groupBox3.Controls.Add(button1);
+            groupBox3.Controls.Add(button2);
+            groupBox3.Controls.Add(button4);
+            groupBox3.Controls.Add(txtHomeOk);
+            groupBox3.Controls.Add(button5);
+            groupBox3.Controls.Add(label18);
+            groupBox3.Controls.Add(button11);
+            groupBox3.Controls.Add(txtResetOk);
+            groupBox3.Controls.Add(button12);
+            groupBox3.Controls.Add(label19);
+            groupBox3.Controls.Add(button13);
+            groupBox3.Controls.Add(txtRun);
+            groupBox3.Controls.Add(button14);
+            groupBox3.Controls.Add(label20);
+            groupBox3.Controls.Add(button15);
+            groupBox3.Controls.Add(txtResetDo);
+            groupBox3.Controls.Add(label22);
+            groupBox3.Controls.Add(label21);
+            groupBox3.Controls.Add(txtReset);
+            groupBox3.Location = new Point(275, 12);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(270, 899);
+            groupBox3.TabIndex = 330;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Boolean Values";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(917, 923);
+            ClientSize = new Size(1019, 923);
+            Controls.Add(groupBox3);
+            Controls.Add(groupBox2);
+            Controls.Add(groupBox1);
+            Controls.Add(btnRead);
             Controls.Add(btnWrite);
-            Controls.Add(btnStop);
             Controls.Add(StatusList);
-            Controls.Add(button47);
+            Controls.Add(btnLight);
             Controls.Add(label1);
-            Controls.Add(button46);
+            Controls.Add(btnConnect);
             Controls.Add(txtIp);
-            Controls.Add(button32);
-            Controls.Add(button33);
-            Controls.Add(button34);
-            Controls.Add(button35);
-            Controls.Add(button36);
-            Controls.Add(button37);
-            Controls.Add(button38);
-            Controls.Add(button39);
-            Controls.Add(button40);
-            Controls.Add(button41);
-            Controls.Add(button42);
-            Controls.Add(button43);
-            Controls.Add(button44);
-            Controls.Add(button45);
-            Controls.Add(button16);
-            Controls.Add(button17);
-            Controls.Add(button18);
-            Controls.Add(button19);
-            Controls.Add(button20);
-            Controls.Add(button21);
-            Controls.Add(button22);
-            Controls.Add(button23);
-            Controls.Add(button24);
-            Controls.Add(button25);
-            Controls.Add(button26);
-            Controls.Add(button27);
-            Controls.Add(button28);
-            Controls.Add(button29);
-            Controls.Add(button30);
-            Controls.Add(txtErrorPLC);
-            Controls.Add(label47);
-            Controls.Add(txtTestLife);
-            Controls.Add(label48);
-            Controls.Add(txtRejectAlmRError);
-            Controls.Add(label49);
-            Controls.Add(txtBoxCount);
-            Controls.Add(label50);
-            Controls.Add(txtSeperatorReset);
-            Controls.Add(label51);
-            Controls.Add(txtSeperatorDelay);
-            Controls.Add(label52);
-            Controls.Add(txtRejectAlmSAlarm);
-            Controls.Add(label53);
-            Controls.Add(txtFlattenAlarm);
-            Controls.Add(label54);
-            Controls.Add(txtMainAlarm);
-            Controls.Add(label55);
-            Controls.Add(txtGate);
-            Controls.Add(label56);
-            Controls.Add(txtEmergency);
-            Controls.Add(label57);
-            Controls.Add(txtCameraTimeout);
-            Controls.Add(label58);
-            Controls.Add(txtCameraDelay);
-            Controls.Add(label59);
-            Controls.Add(txtApplicatorTrigger);
-            Controls.Add(label60);
-            Controls.Add(txtApplicatorDelay);
-            Controls.Add(label16);
-            Controls.Add(txtAcDriveCount);
-            Controls.Add(label17);
-            Controls.Add(txtHomeOk);
-            Controls.Add(label18);
-            Controls.Add(txtResetOk);
-            Controls.Add(label19);
-            Controls.Add(txtRun);
-            Controls.Add(label20);
-            Controls.Add(txtResetDo);
-            Controls.Add(label21);
-            Controls.Add(txtReset);
-            Controls.Add(label22);
-            Controls.Add(txtDischargeCount);
-            Controls.Add(label23);
-            Controls.Add(txtIdler);
-            Controls.Add(label24);
-            Controls.Add(txtStopDelay);
-            Controls.Add(label25);
-            Controls.Add(txtStartDelay);
-            Controls.Add(label26);
-            Controls.Add(txtTopHolding);
-            Controls.Add(label27);
-            Controls.Add(txtSideHolding);
-            Controls.Add(label28);
-            Controls.Add(txtIdlerAct);
-            Controls.Add(label29);
-            Controls.Add(txtTopHoldingAct);
-            Controls.Add(label30);
-            Controls.Add(button15);
-            Controls.Add(button14);
-            Controls.Add(button13);
-            Controls.Add(button12);
-            Controls.Add(button11);
-            Controls.Add(button10);
-            Controls.Add(button9);
-            Controls.Add(button8);
-            Controls.Add(button7);
-            Controls.Add(button6);
-            Controls.Add(button5);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(txtSideHoldingAct);
-            Controls.Add(label14);
-            Controls.Add(txtSpacingAct);
-            Controls.Add(label15);
-            Controls.Add(txtMainAct);
-            Controls.Add(label13);
-            Controls.Add(txtManual);
-            Controls.Add(label12);
-            Controls.Add(txtCounterReset);
-            Controls.Add(label11);
-            Controls.Add(txtRejectDelayR);
-            Controls.Add(label10);
-            Controls.Add(textBox9);
-            Controls.Add(label9);
-            Controls.Add(txtSpacing);
-            Controls.Add(label8);
-            Controls.Add(txtRejectDelayS);
-            Controls.Add(label7);
-            Controls.Add(txtRejectPreDelay);
-            Controls.Add(label6);
-            Controls.Add(txtHome);
-            Controls.Add(label5);
-            Controls.Add(txtLife);
-            Controls.Add(label4);
-            Controls.Add(txtMain);
-            Controls.Add(label3);
-            Controls.Add(txtStop);
-            Controls.Add(label2);
-            Controls.Add(txtStart);
-            Controls.Add(LblStart);
             Controls.Add(btnStart);
+            Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             Name = "Form1";
             Text = "Form1";
+            Load += Form1_Load_1;
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1468,8 +1487,6 @@
         private Label label7;
         private TextBox txtSpacing;
         private Label label8;
-        private TextBox textBox9;
-        private Label label9;
         private TextBox txtRejectDelayR;
         private Label label10;
         private TextBox txtCounterReset;
@@ -1490,7 +1507,6 @@
         private Button button6;
         private Button button7;
         private Button button8;
-        private Button button9;
         private Button button10;
         private Button button11;
         private Button button12;
@@ -1585,11 +1601,14 @@
         private Button button44;
         private Button button45;
         private TextBox txtIp;
-        private Button button46;
+        private Button btnConnect;
         private Label label1;
-        private Button button47;
+        private Button btnLight;
         private ListBox StatusList;
-        private Button btnStop;
         private Button btnWrite;
+        private Button btnRead;
+        private GroupBox groupBox1;
+        private GroupBox groupBox2;
+        private GroupBox groupBox3;
     }
 }
