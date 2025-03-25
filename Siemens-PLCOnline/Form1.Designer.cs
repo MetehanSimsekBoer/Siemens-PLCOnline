@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             btnStart = new Button();
             LblStart = new Label();
             txtStart = new TextBox();
@@ -1455,8 +1456,9 @@
             Controls.Add(txtIp);
             Controls.Add(btnStart);
             Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
-            Text = "Form1";
+            Text = "Siemens PLC";
             Load += Form1_Load_1;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
