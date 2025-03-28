@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.7.0" />
     <PackageReference Include="Sharp7" Version="1.1.84" />
   </ItemGroup>
 

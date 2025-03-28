@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Diagnostics.PerformanceData;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.VisualBasic.Devices;
+using OfficeOpenXml;
 using Sharp7;
 
 namespace Siemens_PLCOnline
@@ -10,24 +12,44 @@ namespace Siemens_PLCOnline
     {
         private S7Client plcS7Client = new S7Client();
         private readonly object plcLock = new object();
+        List<AdresModel> adresler = new List<AdresModel>();
         public Form1()
         {
             InitializeComponent();
+
+
+            string dosyaYolu = Path.Combine(Application.StartupPath, "PLCAdresListesi.xlsx");
+            List<AdresModel> adresler = ExceldenAdresleriOku(dosyaYolu);
+
+
         }
+
 
         private void label53_Click(object sender, EventArgs e)
         {
 
         }
 
+       
         private void btnBasla_Click(object sender, EventArgs e)
         {
             int connectionStatus = plcS7Client.ConnectTo(txtIp.Text, 0, 0);
+            string Start = adresler
+    .FirstOrDefault(x => x.Aciklama == "Start" || x.Aciklama != null)?.Adres;
 
             if (connectionStatus == 0)
             {
 
-                SendCommandForBool("DB1.DBX1.0", true);
+                if (!string.IsNullOrEmpty(Start))
+                {
+                    SendCommandForBool(Start, true);
+                }
+                else
+                {
+                    StatusList.Items.Add("Start adresi bulunamadý!");
+                }
+
+             
 
                 btnStart.Visible = false;
                 btnWrite.Enabled = true;
@@ -137,7 +159,13 @@ namespace Siemens_PLCOnline
 
             };
 
-            var data = ReadMultipleBoolsFromPlc(commandsToRead);
+            var booleanAdresler = adresler
+    .Where(x => string.Equals(x.Tip, "Bool", StringComparison.OrdinalIgnoreCase))
+    .Select(x => x.Adres)
+    .ToList();
+
+
+            var data = ReadMultipleBoolsFromPlc(booleanAdresler);
 
             if (data.Count > 0)
             {
@@ -581,25 +609,33 @@ namespace Siemens_PLCOnline
             try
             {
                 List<string> alarmBits = new List<string>
-        {
-            "DB1.DBX108.0",
-            "DB1.DBX108.1",
-            "DB1.DBX109.0",
-            "DB1.DBX109.1",
-            "DB1.DBX110.0",
-            "DB1.DBX110.1"
-        };
+                {
+                    "DB1.DBX108.0",
+                    "DB1.DBX108.1",
+                    "DB1.DBX109.0",
+                    "DB1.DBX109.1",
+                    "DB1.DBX110.0",
+                    "DB1.DBX110.1"
+                };
+
+
+
+                List<AdresModel> AlarmIs = adresler
+    .Where(x => x.Tip == "Alarm")
+    .ToList();
+                string errorAdres = adresler
+    .FirstOrDefault(x => x.Aciklama.Contains("Error"))?.Adres;
 
                 //while (Connected)
                 //{
-                    try
+                try
                     {
                         bool errorBit;
 
                         
                         lock (plcLock)
                         {
-                            errorBit = ReadBoolFromPlc("DB1.DBX105.6");
+                            errorBit = ReadBoolFromPlc(errorAdres);
                         }
 
                         if (errorBit)
@@ -655,6 +691,38 @@ namespace Siemens_PLCOnline
             YazIslemleriBoolean();
         }
 
+
+        public List<AdresModel> ExceldenAdresleriOku(string? dosyaYolu)
+{
+            
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            using (var package = new ExcelPackage(new FileInfo(dosyaYolu)))
+            {
+                var sheet = package.Workbook.Worksheets[0];
+                int rowCount = sheet.Dimension.End.Row;
+
+                for (int row = 2; row <= rowCount; row++) 
+                {
+                    string adres = sheet.Cells[row, 1].Text;      
+                    string tip = sheet.Cells[row, 2].Text;         
+                    string aciklama = sheet.Cells[row, 3].Text;   
+
+                    if (!string.IsNullOrWhiteSpace(adres))
+                    {
+                        adresler.Add(new AdresModel
+                        {
+                            Adres = adres,
+                            Tip = tip,
+                            Aciklama = aciklama
+                        });
+                    }
+                }
+            }
+
+            return adresler;
+        }
+
         private void btnConnect_Click(object sender, EventArgs e)
         {
             if (plcS7Client.Connected)
@@ -693,7 +761,7 @@ namespace Siemens_PLCOnline
                 btnStart.Enabled = false;
 
                 btnConnect.Text = "Connect";
-                btnConnect.BackColor = System.Drawing.Color.Lime;
+                btnConnect.BackColor = System.Drawing.Color.Red;
             }
         }
 
@@ -702,6 +770,18 @@ namespace Siemens_PLCOnline
             btnStart.Enabled = false;
             btnWrite.Enabled = false;
             btnRead.Enabled = false;
+
+            var adresListesi = adresler
+    .Select(x => new AdresModel
+    {
+        Adres = x.Adres,
+        Tip = x.Tip,
+        Aciklama = x.Aciklama
+    }).ToList();
+
+
+
+            Task.Run(async () => await DBReadErrorBitAsync());
         }
 
       
