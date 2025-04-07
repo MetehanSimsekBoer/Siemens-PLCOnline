@@ -169,6 +169,8 @@
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
             groupBox3 = new GroupBox();
+            btnLoad = new Button();
+            btnGet = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -1439,11 +1441,33 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Boolean Values";
             // 
+            // btnLoad
+            // 
+            btnLoad.Location = new Point(790, 102);
+            btnLoad.Name = "btnLoad";
+            btnLoad.Size = new Size(87, 45);
+            btnLoad.TabIndex = 331;
+            btnLoad.Text = "Degerleri Kaydet";
+            btnLoad.UseVisualStyleBackColor = true;
+            btnLoad.Click += btnLoad_Click;
+            // 
+            // btnGet
+            // 
+            btnGet.Location = new Point(908, 102);
+            btnGet.Name = "btnGet";
+            btnGet.Size = new Size(87, 45);
+            btnGet.TabIndex = 332;
+            btnGet.Text = "Degerleri Getir";
+            btnGet.UseVisualStyleBackColor = true;
+            btnGet.Click += btnGet_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1019, 923);
+            Controls.Add(btnGet);
+            Controls.Add(btnLoad);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
@@ -1612,5 +1636,7 @@
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private GroupBox groupBox3;
+        private Button btnLoad;
+        private Button btnGet;
     }
 }

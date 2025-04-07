@@ -30,7 +30,7 @@ namespace Siemens_PLCOnline
 
         }
 
-       
+
         private void btnBasla_Click(object sender, EventArgs e)
         {
             int connectionStatus = plcS7Client.ConnectTo(txtIp.Text, 0, 0);
@@ -49,7 +49,7 @@ namespace Siemens_PLCOnline
                     StatusList.Items.Add("Start adresi bulunamadý!");
                 }
 
-             
+
 
                 btnStart.Visible = false;
                 btnWrite.Enabled = true;
@@ -59,7 +59,7 @@ namespace Siemens_PLCOnline
 
                 Task.Run(async () => await DBReadErrorBitAsync());
             }
-            
+
         }
 
 
@@ -160,15 +160,25 @@ namespace Siemens_PLCOnline
             };
 
             var booleanAdresler = adresler
-    .Where(x => string.Equals(x.Tip, "Bool", StringComparison.OrdinalIgnoreCase))
-    .Select(x => x.Adres)
-    .ToList();
+     .Where(x => string.Equals(x.Tip, "Bool", StringComparison.OrdinalIgnoreCase)
+              || string.Equals(x.Tip, "Alarm", StringComparison.OrdinalIgnoreCase))
+     .Select(x => x.Adres)
+     .ToList();
 
 
             var data = ReadMultipleBoolsFromPlc(booleanAdresler);
 
             if (data.Count > 0)
             {
+
+
+
+
+
+
+
+
+
                 txtStart.Text = data["DB1.DBX0.1"].ToString();
                 txtStop.Text = data["DB1.DBX0.2"].ToString();
                 txtLife.Text = data["DB1.DBX0.0"].ToString();
@@ -205,7 +215,7 @@ namespace Siemens_PLCOnline
 
 
 
-             
+
             }
 
             StatusList.Items.Add($"Boolean Deðerler Okundu.");
@@ -283,7 +293,7 @@ namespace Siemens_PLCOnline
 
         }
 
-        
+
 
 
 
@@ -291,7 +301,7 @@ namespace Siemens_PLCOnline
         {
             try
             {
-               
+
                 var grouped = boolCommands
                     .Where(x => Regex.IsMatch(x.Key, @"^DB(\d+)\.DBX(\d+)\.(\d+)$"))
                     .Select(x =>
@@ -314,7 +324,7 @@ namespace Siemens_PLCOnline
                     int byteIndex = group.Key.ByteIndex;
                     byte[] buffer = new byte[1];
 
-                   
+
                     int readResult = plcS7Client.DBRead(dbNumber, byteIndex, 1, buffer);
                     if (readResult != 0)
                     {
@@ -322,7 +332,7 @@ namespace Siemens_PLCOnline
                         continue;
                     }
 
-                  
+
                     foreach (var item in group)
                     {
                         if (item.Value)
@@ -331,7 +341,7 @@ namespace Siemens_PLCOnline
                             buffer[0] &= (byte)~(1 << item.BitIndex);
                     }
 
-                  
+
                     int writeResult = plcS7Client.DBWrite(dbNumber, byteIndex, 1, buffer);
                     if (writeResult != 0)
                     {
@@ -375,7 +385,7 @@ namespace Siemens_PLCOnline
                     int byteIndex = Convert.ToInt16(match.Groups[2].Value);
 
                     byte[] buffer = BitConverter.GetBytes(value);
-                    Array.Reverse(buffer); 
+                    Array.Reverse(buffer);
 
                     int writeResult = plcS7Client.DBWrite(dbNumber, byteIndex, buffer.Length, buffer);
 
@@ -629,54 +639,54 @@ namespace Siemens_PLCOnline
                 //while (Connected)
                 //{
                 try
-                    {
-                        bool errorBit;
+                {
+                    bool errorBit;
 
-                        
+
+                    lock (plcLock)
+                    {
+                        errorBit = ReadBoolFromPlc(errorAdres);
+                    }
+
+                    if (errorBit)
+                    {
+                        Dictionary<string, bool> alarmResults;
+
                         lock (plcLock)
                         {
-                            errorBit = ReadBoolFromPlc(errorAdres);
+                            var readResult = ReadMultipleBoolsFromPlc(alarmBits);
+                            alarmResults = readResult.ToDictionary(k => k.Key, v => v.Value);
                         }
 
-                        if (errorBit)
+                        this.Invoke((MethodInvoker)delegate
                         {
-                            Dictionary<string, bool> alarmResults;
-
-                            lock (plcLock)
-                            {
-                                var readResult = ReadMultipleBoolsFromPlc(alarmBits);
-                                alarmResults = readResult.ToDictionary(k => k.Key, v => v.Value);
-                            }
-
-                            this.Invoke((MethodInvoker)delegate
-                            {
-                                txtErrorPLC.Text = errorBit.ToString();
-                                txtEmergency.Text = alarmResults["DB1.DBX108.0"].ToString();
-                                txtGate.Text = alarmResults["DB1.DBX108.1"].ToString();
-                                txtMainAlarm.Text = alarmResults["DB1.DBX109.0"].ToString();
-                                txtFlattenAlarm.Text = alarmResults["DB1.DBX109.1"].ToString();
-                                txtRejectAlmSAlarm.Text = alarmResults["DB1.DBX110.0"].ToString();
-                                txtRejectAlmRError.Text = alarmResults["DB1.DBX110.1"].ToString();
-                            });
-                        }
-                        else
-                        {
-                            lock (plcLock)
-                            {
-                                SendCommandForBool("DB1.DBX105.6", false);
-                            }
-
-                            StatusList.Items.Add("Error bit pasif.");
-                        }
+                            txtErrorPLC.Text = errorBit.ToString();
+                            txtEmergency.Text = alarmResults["DB1.DBX108.0"].ToString();
+                            txtGate.Text = alarmResults["DB1.DBX108.1"].ToString();
+                            txtMainAlarm.Text = alarmResults["DB1.DBX109.0"].ToString();
+                            txtFlattenAlarm.Text = alarmResults["DB1.DBX109.1"].ToString();
+                            txtRejectAlmSAlarm.Text = alarmResults["DB1.DBX110.0"].ToString();
+                            txtRejectAlmRError.Text = alarmResults["DB1.DBX110.1"].ToString();
+                        });
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        plcS7Client.Disconnect();
-                        StatusList.Items.Add($"Hata oluþtu: {ex.Message}");
-                        StatusList.Items.Add($"IP Adresi: {txtIp.Text}");
-                    }
+                        lock (plcLock)
+                        {
+                            SendCommandForBool("DB1.DBX105.6", false);
+                        }
 
-                    await Task.Delay(1000);
+                        StatusList.Items.Add("Error bit pasif.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    plcS7Client.Disconnect();
+                    StatusList.Items.Add($"Hata oluþtu: {ex.Message}");
+                    StatusList.Items.Add($"IP Adresi: {txtIp.Text}");
+                }
+
+                await Task.Delay(1000);
                 //}
             }
             catch (Exception ex)
@@ -693,8 +703,8 @@ namespace Siemens_PLCOnline
 
 
         public List<AdresModel> ExceldenAdresleriOku(string? dosyaYolu)
-{
-            
+        {
+
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using (var package = new ExcelPackage(new FileInfo(dosyaYolu)))
@@ -702,11 +712,11 @@ namespace Siemens_PLCOnline
                 var sheet = package.Workbook.Worksheets[0];
                 int rowCount = sheet.Dimension.End.Row;
 
-                for (int row = 2; row <= rowCount; row++) 
+                for (int row = 2; row <= rowCount; row++)
                 {
-                    string adres = sheet.Cells[row, 1].Text;      
-                    string tip = sheet.Cells[row, 2].Text;         
-                    string aciklama = sheet.Cells[row, 3].Text;   
+                    string adres = sheet.Cells[row, 1].Text;
+                    string tip = sheet.Cells[row, 2].Text;
+                    string aciklama = sheet.Cells[row, 3].Text;
 
                     if (!string.IsNullOrWhiteSpace(adres))
                     {
@@ -784,12 +794,132 @@ namespace Siemens_PLCOnline
             Task.Run(async () => await DBReadErrorBitAsync());
         }
 
-      
+
 
         private void btnRead_Click(object sender, EventArgs e)
         {
             OkuIslemleriWords();
             OkuIslemleriBoolean();
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            var data = new Dictionary<string, string>
+    {
+        { "Main", txtMain.Text },
+        { "Spacing", txtSpacing.Text },
+        { "SideHolding", txtSideHolding.Text },
+        { "TopHolding", txtTopHolding.Text },
+        { "Idler", txtIdler.Text },
+        { "RejectPreDelay", txtRejectPreDelay.Text },
+        { "RejectDelayS", txtRejectDelayS.Text },
+        { "RejectDelayR", txtRejectDelayR.Text },
+        { "StartDelay", txtStartDelay.Text },
+        { "StopDelay", txtStopDelay.Text },
+        { "ApplicatorDelay", txtApplicatorDelay.Text },
+        { "ApplicatorTrigger", txtApplicatorTrigger.Text },
+        { "CameraDelay", txtCameraDelay.Text },
+        { "CameraTimeout", txtCameraTimeout.Text },
+        { "AcDriveCount", txtAcDriveCount.Text },
+        { "DischargeCount", txtDischargeCount.Text },
+        { "SeperatorDelay", txtSeperatorDelay.Text },
+        { "SeperatorReset", txtSeperatorReset.Text },
+        { "BoxCount", txtBoxCount.Text },
+
+        { "Start", txtStart.Text },
+        { "Life", txtLife.Text },
+        { "Stop", txtStop.Text },
+        { "Home", txtHome.Text },
+        { "CounterReset", txtCounterReset.Text },
+        { "Manual", txtManual.Text },
+        { "MainAct", txtMainAct.Text },
+        { "SpacingAct", txtSpacingAct.Text },
+        { "SideHoldingAct", txtSideHoldingAct.Text },
+        { "TopHoldingAct", txtTopHoldingAct.Text },
+        { "IdlerAct", txtIdlerAct.Text },
+        { "Reset", txtReset.Text },
+        { "ResetDo", txtResetDo.Text },
+        { "Run", txtRun.Text },
+        { "ResetOk", txtResetOk.Text },
+        { "HomeOk", txtHomeOk.Text },
+        { "TestLife", txtTestLife.Text },
+        { "ErrorPLC", txtErrorPLC.Text },
+        { "Emergency", txtEmergency.Text },
+        { "Gate", txtGate.Text },
+        { "MainAlarm", txtMainAlarm.Text },
+        { "FlattenAlarm", txtFlattenAlarm.Text },
+        { "RejectAlmSAlarm", txtRejectAlmSAlarm.Text },
+        { "RejectAlmRError", txtRejectAlmRError.Text }
+    };
+
+            string json = System.Text.Json.JsonSerializer.Serialize(data);
+            File.WriteAllText("ayarlar.txt", json);
+            var result = MessageBox.Show("Deðerler kaydedildi.\nAyar dosyasýný açmak ister misiniz?", "Bilgi",
+    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                System.Diagnostics.Process.Start("notepad.exe", "ayarlar.txt");
+            }
+        }
+
+        private void btnGet_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists("ayarlar.txt"))
+            {
+                MessageBox.Show("Kayýtlý ayar bulunamadý.");
+                return;
+            }
+
+            string json = File.ReadAllText("ayarlar.txt");
+            var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, string>>(json);
+
+            txtMain.Text = data["Main"];
+            txtSpacing.Text = data["Spacing"];
+            txtSideHolding.Text = data["SideHolding"];
+            txtTopHolding.Text = data["TopHolding"];
+            txtIdler.Text = data["Idler"];
+            txtRejectPreDelay.Text = data["RejectPreDelay"];
+            txtRejectDelayS.Text = data["RejectDelayS"];
+            txtRejectDelayR.Text = data["RejectDelayR"];
+            txtStartDelay.Text = data["StartDelay"];
+            txtStopDelay.Text = data["StopDelay"];
+            txtApplicatorDelay.Text = data["ApplicatorDelay"];
+            txtApplicatorTrigger.Text = data["ApplicatorTrigger"];
+            txtCameraDelay.Text = data["CameraDelay"];
+            txtCameraTimeout.Text = data["CameraTimeout"];
+            txtAcDriveCount.Text = data["AcDriveCount"];
+            txtDischargeCount.Text = data["DischargeCount"];
+            txtSeperatorDelay.Text = data["SeperatorDelay"];
+            txtSeperatorReset.Text = data["SeperatorReset"];
+            txtBoxCount.Text = data["BoxCount"];
+
+            txtStart.Text = data["Start"];
+            txtLife.Text = data["Life"];
+            txtStop.Text = data["Stop"];
+            txtHome.Text = data["Home"];
+            txtCounterReset.Text = data["CounterReset"];
+            txtManual.Text = data["Manual"];
+            txtMainAct.Text = data["MainAct"];
+            txtSpacingAct.Text = data["SpacingAct"];
+            txtSideHoldingAct.Text = data["SideHoldingAct"];
+            txtTopHoldingAct.Text = data["TopHoldingAct"];
+            txtIdlerAct.Text = data["IdlerAct"];
+            txtReset.Text = data["Reset"];
+            txtResetDo.Text = data["ResetDo"];
+            txtRun.Text = data["Run"];
+            txtResetOk.Text = data["ResetOk"];
+            txtHomeOk.Text = data["HomeOk"];
+            txtTestLife.Text = data["TestLife"];
+            txtErrorPLC.Text = data["ErrorPLC"];
+            txtEmergency.Text = data["Emergency"];
+            txtGate.Text = data["Gate"];
+            txtMainAlarm.Text = data["MainAlarm"];
+            txtFlattenAlarm.Text = data["FlattenAlarm"];
+            txtRejectAlmSAlarm.Text = data["RejectAlmSAlarm"];
+            txtRejectAlmRError.Text = data["RejectAlmRError"];
+
+            MessageBox.Show("Kaydedilen Deðerler Getirildi.");
         }
     }
 }
